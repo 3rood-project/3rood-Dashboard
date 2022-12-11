@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NotificationAlert from "react-notification-alert";
 
 // react-bootstrap components
@@ -14,13 +14,37 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+import axios from "axios";
 
 function Posts() {
+  const [pendings, setPendings] = useState([]);
+  const [approved, setApproved] = useState(false);
+  const [deny, setDeny] = useState(false);
 
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/pendingsPost").then((response) => {
+      console.log(response.data.data);
+      setPendings(response.data.data);
+    });
+  }, [approved, deny]);
+
+
+  function handleApprove(id){
+    axios.put(`http://localhost:8000/api/approve-post/${id}`).then((response) => {
+      setApproved(!approved);
+    })
+  }
+
+  function handleDeny(id){
+    axios.put(`http://localhost:8000/api/deny-post/${id}`).then((response) => {
+      setDeny(!deny);
+    })
+  }
 
   return (
     <>
-     <Container fluid>
+      <Container fluid>
         <Row>
           <Col md="12">
             <Card className="strpied-tabled-with-hover">
@@ -33,63 +57,36 @@ function Posts() {
                   <thead>
                     <tr>
                       <th className="border-0">ID</th>
-                      <th className="border-0">User ID</th>
                       <th className="border-0">User Name</th>
                       <th className="border-0">Post Content</th>
-                      <th className="border-0">photo</th>
-              
-
+                      <th className="border-0">Post Image</th>
+                      {/* <th className="border-0">photo</th> */}
                       <th className="border-0"></th>
-
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>rama@gmail.com</td>
-                      <td>rama</td>
-                      <td>User</td>
-                      <td>5</td>
-                      <td><button className="btn btn-success">Approve</button></td>
+                    {console.log(pendings)}
+                    {pendings?.map((pending) => {
+                      console.log(pending);
+                     return <tr>
+                        <td>{pending.user_info.id}</td>
+                        <td>{pending.user_info.first_name}</td>
+                        <td>{pending.post_content.slice(0, 30)}...More</td>
+                        <td>{pending.post_image}</td>
+                        <td>
+                          <button onClick={() => handleApprove(pending.post_id)} className="btn btn-success">Approve</button>
+                        </td>
 
-                      <td><button className="btn btn-danger ms-4">Deny</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>rama@gmail.com</td>
-                      <td>rama</td>
-                      <td>User</td>
-                      <td>5</td>
-                      
-                      <td><button className="btn btn-success">Approve</button></td>
-
-                      <td><button className="btn btn-danger ms-4">Deny</button>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>rama@gmail.com</td>
-                      <td>rama</td>
-                      <td>User</td>
-                      <td>5</td>
-                      <td><button className="btn btn-success" >Approve</button></td>
-                      
-
-                      <td><button className="btn btn-danger ms-4">Deny</button>
-                      </td>
-                    </tr>
-                   
+                        <td>
+                          <button onClick={() => handleDeny(pending.post_id)} className="btn btn-danger ms-4">Deny</button>
+                        </td>
+                      </tr>
+                    })}
                   </tbody>
                 </Table>
               </Card.Body>
             </Card>
           </Col>
-        
         </Row>
       </Container>
     </>
