@@ -23,12 +23,10 @@ function News() {
   // handel tow modals states================
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [updated, setUpdated] = useState(false);
-
   const [currentModalAtricle, setCurrentModalAtricle] = useState({
     title : '',
     author: '',
@@ -38,7 +36,43 @@ function News() {
     // media: ''
   });
 
+  // state for add article 
+  const [newArticle, setNewArticle] = useState({
+    author: '',
+    title: '',
+    image:'',
+    excerpt: '',
+    summary: '',
+  })
 
+  // handle add new atricle inputs
+  function handleAddNewArticle(e){
+    setNewArticle({...newArticle, [e.target.name]: e.target.value});
+  }
+
+  // to add new article
+  function handleSubmitAddArticle(e){
+    e.preventDefault();
+
+    const config = {
+      method: 'post',
+      url: 'http://localhost:8000/api/add-article',
+      headers: { 
+        'Accept': 'application/vnd.api+json', 
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data : qs.stringify(newArticle)
+    };
+
+    axios(config).then((res) => {
+      console.log(res);
+      setUpdated(!updated);
+      setShow(false);
+    })
+
+  }
+
+  // to get all articles
   useEffect(()=> {
     axios.get('http://localhost:8000/api/all-articles').then((res) => {
       console.log(res.data.data);
@@ -46,6 +80,7 @@ function News() {
     })
   },[updated])
 
+  //filter all articles to get only the approved
   const handleShow2 = (id) => {
     setShow2(true)
     let art = allArticles.filter((art) => art.article_id == id)
@@ -59,11 +94,14 @@ function News() {
 
   const [allArticles, setAllArticles] = useState([]);
 
+  // handle the modal current article 
   function handleChange(e){
     setCurrentModalAtricle({ ...currentModalAtricle, [e.target.name]: e.target.value });
     console.log(e.target.value);
   }
 
+
+  // handle the update one aritcle in the modal
   function handleSubmit(e, id){
     e.preventDefault();
     console.log(id);
@@ -85,9 +123,8 @@ function News() {
     })
   }
 
-
-
-  const handleDelete = () => {
+  // handle delete one aritcle 
+  const handleDelete = (id) => {
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this item!",
@@ -99,11 +136,18 @@ function News() {
         swal("Poof! Your item has been deleted!", {
           icon: "success",
         });
+        axios.delete(`http://localhost:8000/api/delete-article/${id}`).then((resp) => {
+          console.log(resp);
+          setUpdated(!updated);
+        })
       } else {
         swal("Your item is safe!");
       }
     });
   };
+
+
+
   return (
     <>
       <Container fluid>
@@ -150,7 +194,7 @@ function News() {
                       <td>
                         <button
                           className="btn btn-danger ms-4"
-                          onClick={handleDelete}>
+                          onClick={() => handleDelete(article.article_id)}>
                           Delete
                         </button>
                       </td>
@@ -168,34 +212,41 @@ function News() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add New User</Modal.Title>
+          <Modal.Title>Add New Article</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
+          <Form onSubmit={(e) => handleSubmitAddArticle(e)}>
+            <Form.Group className="mb-3" controlId="formBasicName">
+              <Form.Label>Author</Form.Label>
+              <Form.Control name="author" value={newArticle.author} onChange={(e) => handleAddNewArticle(e)} type="text-area" placeholder="Enter Author name" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicTitle">
               <Form.Label>ARTICLE TITLE</Form.Label>
-              <Form.Control type="text" placeholder="ARTICLE TITLE" />
+              <Form.Control name="title" value={newArticle.title} onChange={(e) => handleAddNewArticle(e)} type="text" placeholder="ARTICLE TITLE" />
+            </Form.Group>
+
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Label>ARTICLE IMAGE</Form.Label>
+              <Form.Control name="image" type="file" />
+            </Form.Group>
+            
+
+            <Form.Group className="mb-3" controlId="formBasicExcerpt">
+              <Form.Label>ARTICLE EXCERPT</Form.Label>
+              <Form.Control name="excerpt" value={newArticle.excerpt} onChange={(e) => handleAddNewArticle(e)} as="textarea" type="text" placeholder="ARTICLE EXCERPT" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicContent">
               <Form.Label>ARTICLE CONTENT</Form.Label>
-              <Form.Control type="text" placeholder="ARTICLE CONTENT" />
-            </Form.Group>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>ARTICLE PHOTO</Form.Label>
-              <Form.Control type="file" />
+              <Form.Control name="summary" value={newArticle.summary} onChange={(e) => handleAddNewArticle(e)} as="textarea" type="text" placeholder="ARTICLE CONTENT" />
             </Form.Group>
             <div className="d-flex justify-content-between">
-              <Button variant="success" type="submit">
-                Submit
-              </Button>
               <Button variant="danger" onClick={handleClose}>
                 Close
+              </Button>
+              <Button variant="success" type="submit">
+                Add
               </Button>
             </div>
           </Form>
@@ -230,7 +281,7 @@ function News() {
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicContent">
-              <Form.Label>ARTICLE Excerpt</Form.Label>
+              <Form.Label>ARTICLE EXCERPT</Form.Label>
               <Form.Control name="excerpt"  value={currentModalAtricle.excerpt} onChange={(e) => handleChange(e)} type="text" placeholder="ARTICLE CONTENT" />
             </Form.Group>
 
@@ -240,11 +291,11 @@ function News() {
             </Form.Group>
 
             <div className="d-flex justify-content-between">
-              <Button variant="success" type="submit">
-                Submit
-              </Button>
               <Button variant="danger" onClick={handleClose2}>
                 Close
+              </Button>
+              <Button variant="success" type="submit">
+                Update
               </Button>
             </div>
           </Form>
