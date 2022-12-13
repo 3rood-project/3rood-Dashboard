@@ -21,12 +21,12 @@ function TableList() {
   const [users, setUsers] = useState([]);
   const [deleted, setDeleted] = useState(false);
   const [userData, setUserData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    password: '',
-    role: ''
-  })
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+    role: "",
+  });
 
   // get all users to show in the dashboard
   useEffect(() => {
@@ -36,19 +36,9 @@ function TableList() {
     });
   }, [deleted]);
 
-
   const handleChange = (e) => {
     seCredential({ ...credential, [e.target.name]: e.target.value });
   };
-
-
-
-
-
-
-
-
-
 
   const [show, setShow] = useState(false);
 
@@ -67,16 +57,18 @@ function TableList() {
         swal("Poof! Your item has been deleted!", {
           icon: "success",
         });
-        axios.get(`http://localhost:8000/api/delete-user/${id}`).then((response) => {
-          console.log(response);
-          setDeleted(!deleted);
-        })
+        axios
+          .get(`http://localhost:8000/api/delete-user/${id}`)
+          .then((response) => {
+            console.log(response);
+            setDeleted(!deleted);
+          });
       } else {
         swal("Your item is safe!");
       }
     });
   };
-  if(users.length == 0 ){
+  if (users.length == 0) {
     return;
   }
   return (
@@ -109,22 +101,23 @@ function TableList() {
                   </thead>
                   <tbody>
                     {users.map((user) => {
-                      return(
-                      <tr>
-                        <td>{user.user_id}</td>
-                        <td>{user.firstName}</td>
-                        <td>{user.email}</td>
-                        <td>{user.role}</td>
-                        <td>{user.userPoints}</td>
-                        <td>
-                          <button
-                            className="btn btn-danger ms-4"
-                            onClick={() => handleDelete(user.user_id)}>
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                      )
+                      return (
+                        <tr>
+                          <td>{user.user_id}</td>
+                          <td>{user.firstName}</td>
+                          <td>{user.email}</td>
+                          <td>{user.role}</td>
+                          <td>{user.userPoints}</td>
+                          <td>
+                            <button
+                              className="btn btn-danger ms-4"
+                              onClick={() => handleDelete(user.user_id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      );
                     })}
                   </tbody>
                 </Table>
@@ -134,7 +127,7 @@ function TableList() {
         </Row>
         {/*-----------Modal------------ */}
       </Container>
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>
@@ -186,6 +179,7 @@ function TableList() {
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
+                  */}
     </>
   );
 }

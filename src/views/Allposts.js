@@ -15,43 +15,41 @@ import {
 } from "react-bootstrap";
 
 function Allposts() {
-
   const [allPosts, setAllPosts] = useState([]);
   const [deletePost, setDeletePost] = useState(false);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/all-posts').then((response) => {
+    axios.get("http://localhost:8000/api/all-posts").then((response) => {
       setAllPosts(response.data.data);
-    })
-  },[deletePost])
+    });
+  }, [deletePost]);
 
-
-
-    const handleDelete = (id) => {
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this item!",
-            icon: "error",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Poof! Your item has been deleted!", {
-                icon: "success",
-              });
-              axios.get(`http://localhost:8000/api/delete-post/${id}`).then((response) => {
-                setDeletePost(!deletePost);
-              })
-            } else {
-              swal("Your item is safe!");
-            }
+  const handleDelete = (id) => {
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover this item!",
+      icon: "error",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("Poof! Your item has been deleted!", {
+          icon: "success",
+        });
+        axios
+          .get(`http://localhost:8000/api/delete-post/${id}`)
+          .then((response) => {
+            setDeletePost(!deletePost);
           });
+      } else {
+        swal("Your item is safe!");
       }
+    });
+  };
 
   return (
     <>
-     <Container fluid>
+      <Container fluid>
         <Row>
           <Col md="12">
             <Card className="strpied-tabled-with-hover">
@@ -68,24 +66,31 @@ function Allposts() {
                       <th className="border-0">User Name</th>
                       <th className="border-0">Post Content</th>
                       <th className="border-0">photo</th>
-              
 
                       <th className="border-0"></th>
-
                     </tr>
                   </thead>
                   <tbody>
                     {allPosts.map((post) => {
-
-                      return <tr key={post.post_id}>
-                      <td>{post.post_id}</td>
-                      <td>{post.user_info.id}</td>
-                      <td>{post.user_info.first_name}</td>
-                      <td>{post.post_content.slice(0,20)}... See More</td>
-                      <td><img src={post.post_image} alt="alt image"/></td>
-                      <td><button className="btn btn-danger ms-4" onClick={() => handleDelete(post.post_id)}>Delete</button>
-                      </td>
-                    </tr>
+                      return (
+                        <tr key={post.post_id}>
+                          <td>{post.post_id}</td>
+                          <td>{post.user_info.id}</td>
+                          <td>{post.user_info.first_name}</td>
+                          <td>{post.post_content.slice(0, 20)}... See More</td>
+                          <td>
+                            <img src={post.post_image} alt="alt image" />
+                          </td>
+                          <td>
+                            <button
+                              className="btn btn-danger ms-4"
+                              onClick={() => handleDelete(post.post_id)}
+                            >
+                              Remove
+                            </button>
+                          </td>
+                        </tr>
+                      );
                     })}
                   </tbody>
                 </Table>
