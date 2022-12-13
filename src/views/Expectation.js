@@ -1,4 +1,5 @@
 import axios from "axios";
+import { MDBIcon } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 
 // react-bootstrap components
@@ -13,10 +14,14 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+import EditExpectation from "./EditExpectation";
 
 function AllExpectation() {
   const [allExpectation, setAllExpectation] = useState([]);
   const [deleteExpectation, setDeleteExpectation] = useState(false);
+  const [optSmModal2, setOptSmModal2] = useState(false);
+
+  const toggleShow2 = () => setOptSmModal2(!optSmModal2);
 
   useEffect(() => {
     axios.get("http://localhost:8000/api/expectation").then((response) => {
@@ -105,28 +110,26 @@ function AllExpectation() {
                             >
                               Remove
                             </button>
-
-                            <div>
-                              <MDBIcon
-                                fas
-                                icon="edit"
-                                onClick={toggleShow2}
-                                style={{ fontSize: 20, cursor: "pointer" }}
-                              />
-                              <EditPost
-                                toggleShow={toggleShow2}
-                                setBasicModal={setOptSmModal2}
-                                basicModal={optSmModal2}
-                                postId={postData.postId}
-                              />
-                              <MDBIcon
-                                fas
-                                icon="trash-alt"
-                                className="ms-3 text-danger"
-                                style={{ fontSize: 20, cursor: "pointer" }}
-                              />
-                            </div>
                           </td>
+                          <div>
+                            {/*     <MDBIcon
+                              fas
+                              icon="trash-alt"
+                              className="ms-3 text-danger"
+                              onClick={() => handleDelete(expectation.id)}
+                              style={{ fontSize: 20, cursor: "pointer" }}
+                            />     <MDBIcon
+                              fas
+                              icon="edit"
+                              onClick={toggleShow2}
+                              style={{ fontSize: 20, cursor: "pointer" }}
+                            />    <EditExpectation
+                              toggleShow={toggleShow2}
+                              setBasicModal={setOptSmModal2}
+                              basicModal={optSmModal2}
+                              postId={postData.postId}
+                      />*/}
+                          </div>
                         </tr>
                       );
                     })}
