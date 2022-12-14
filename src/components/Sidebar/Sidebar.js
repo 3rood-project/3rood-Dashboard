@@ -57,7 +57,7 @@ function Sidebar({ color, image, routes }) {
                   // className={
                   //   prop.upgrade
                   //     ? "active active-pro"
-                  //     : activeRoute(prop.layout + prop.path)
+                  //     :git init activeRoute(prop.layout + prop.path)
                   // }
                   key={key}
                 >

@@ -143,7 +143,7 @@ function TableList() {
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal> */}
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show}  onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>
