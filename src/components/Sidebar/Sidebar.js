@@ -32,7 +32,8 @@ function Sidebar({ color, image, routes }) {
       <div
         className="sidebar-background"
         style={{
-          backgroundImage: "url('https://r1.ilikewallpaper.net/iphone-wallpapers/download/80252/green-sports-court-illustration-iphone-wallpaper-ilikewallpaper_com.jpg')"
+          backgroundImage:
+            "url('https://r1.ilikewallpaper.net/iphone-wallpapers/download/80252/green-sports-court-illustration-iphone-wallpaper-ilikewallpaper_com.jpg')",
         }}
       />
       <div className="sidebar-wrapper">
@@ -41,13 +42,11 @@ function Sidebar({ color, image, routes }) {
             href="https://www.creative-tim.com?ref=lbd-sidebar"
             className="simple-text logo-mini mx-1"
           > */}
-            <div className="logo-img">
-              <img src={require("assets/img/reactlogo.png")} alt="..." />
-            </div>
+          <div className="logo-img">
+            <img src={require("assets/img/logo.png")} alt="..." />
+          </div>
           {/* </a> */}
-          <a className="simple-text" href="http://www.creative-tim.com">
-            Sport Score
-          </a>
+          <h1 className="simple-text">Hayya Dashboard </h1>
         </div>
         <Nav>
           {routes.map((prop, key) => {
