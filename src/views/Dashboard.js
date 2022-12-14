@@ -141,7 +141,11 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-chat-round text-primary"></i>
+                      <i
+                        className="nc-icon nc-alien-33
+
+text-primary"
+                      ></i>
                     </div>
                   </Col>
                   <Col xs="7">

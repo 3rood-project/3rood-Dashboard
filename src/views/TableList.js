@@ -129,39 +129,60 @@ function TableList() {
           <Modal.Title>Add New User</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          
-          <Form >
-
+          <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control name="email" type="email" placeholder="Enter email" />
+              <Form.Control
+                name="email"
+                type="email"
+                placeholder="Enter email"
+              />
             </Form.Group>
 
             <div className="d-flex justify-content-between">
-            <div className="col-md-6 p-0" >
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>First name</Form.Label>
-              <Form.Control onChange={handleChange} name="first_name" type="text" placeholder="First Name" />
-            </Form.Group>
-            </div>
+              <div className="col-md-6 p-0">
+                <Form.Group className="mb-3" controlId="formBasicName">
+                  <Form.Label>First name</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    name="first_name"
+                    type="text"
+                    placeholder="First Name"
+                  />
+                </Form.Group>
+              </div>
 
-            <div className="col-md-5 p-0" >
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Last name</Form.Label>
-              <Form.Control onChange={handleChange} name="last_name" type="text" placeholder="Last Name" />
-            </Form.Group>
+              <div className="col-md-5 p-0">
+                <Form.Group className="mb-3" controlId="formBasicName">
+                  <Form.Label>Last name</Form.Label>
+                  <Form.Control
+                    onChange={handleChange}
+                    name="last_name"
+                    type="text"
+                    placeholder="Last Name"
+                  />
+                </Form.Group>
+              </div>
             </div>
-            </div>
-
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label>Password</Form.Label>
-              <Form.Control onChange={handleChange} name="password" type="password" placeholder="Password" />
+              <Form.Control
+                onChange={handleChange}
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicRole">
               <Form.Label>Role</Form.Label>
-              <Form.Control onChange={handleChange} name="role" type="text" placeholder="Role" />
+              <Form.Control
+                onChange={handleChange}
+                name="role"
+                type="text"
+                placeholder="Role"
+              />
             </Form.Group>
 
             <div className="d-flex justify-content-between">

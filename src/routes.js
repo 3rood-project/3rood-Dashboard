@@ -67,13 +67,13 @@ const dashboardRoutes = [
   //   component: Typography,
   //   layout: "/admin"
   // },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "nc-icon nc-atom",
-    component: Icons,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-atom",
+  //   component: Icons,
+  //   layout: "/admin",
+  // },
   {
     path: "/posts",
     name: "Posts Request",
@@ -105,7 +105,7 @@ const dashboardRoutes = [
   {
     path: "/expectation",
     name: "Expectation",
-    icon: "nc-icon nc-bell-55",
+    icon: "nc-icon nc-alien-33",
     component: AllExpectation,
     layout: "/admin",
   },

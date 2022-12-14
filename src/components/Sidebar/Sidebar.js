@@ -34,6 +34,8 @@ function Sidebar({ color, image, routes }) {
         style={{
           backgroundImage:
             "url('https://r1.ilikewallpaper.net/iphone-wallpapers/download/80252/green-sports-court-illustration-iphone-wallpaper-ilikewallpaper_com.jpg')",
+          backgroundImage:
+            "url('https://r1.ilikewallpaper.net/iphone-wallpapers/download/80252/green-sports-court-illustration-iphone-wallpaper-ilikewallpaper_com.jpg')",
         }}
       />
       <div className="sidebar-wrapper">
@@ -43,23 +45,21 @@ function Sidebar({ color, image, routes }) {
             className="simple-text logo-mini mx-1"
           > */}
           <div className="logo-img">
-            <img src={require("assets/img/reactlogo.png")} alt="..." />
+            <img src={require("assets/img/logo.png")} alt="..." />
           </div>
           {/* </a> */}
-          <a className="simple-text" href="http://www.creative-tim.com">
-            Sport Score
-          </a>
+          <h1 className="simple-text">Hayya Dashboard </h1>
         </div>
         <Nav>
           {routes.map((prop, key) => {
             if (!prop.redirect)
               return (
                 <li
-                  className={
-                    prop.upgrade
-                      ? "active active-pro"
-                      : activeRoute(prop.layout + prop.path)
-                  }
+                  // className={
+                  //   prop.upgrade
+                  //     ? "active active-pro"
+                  //     :git init activeRoute(prop.layout + prop.path)
+                  // }
                   key={key}
                 >
                   <NavLink
