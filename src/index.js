@@ -39,7 +39,7 @@ root.render(
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Redirect from="/" to="/admin/dashboard" />
     </Switch>
-    <Notifications />
-    <Upgrade />
+    {/*  <Notifications />
+<Upgrade />*/}
   </BrowserRouter>
 );
