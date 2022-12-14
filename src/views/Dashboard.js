@@ -18,15 +18,13 @@ import {
 import axios from "axios";
 
 function Dashboard() {
-  const [counts, setCounts] = useState('');
+  const [counts, setCounts] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/data-counts').then((response) => {
-      console.log(response.data.data);
+    axios.get("http://localhost:8000/api/data-counts").then((response) => {
       setCounts(response.data.data);
-    })
-  },[])
-
+    });
+  }, []);
 
   return (
     <>
