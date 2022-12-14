@@ -44,7 +44,7 @@ export default function AddExpectation({
     url: "http://localhost:8000/api/addExpectation",
     headers: {
       Accept: "application/vnd.api+json",
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
     },
     data: expectationData,
   };
@@ -53,8 +53,7 @@ export default function AddExpectation({
     if (expectationData == "") return null;
     axios(config)
       .then(function (res) {
-        console.log(res.data);
-
+        console.log(res);
         const Toast = Swal.mixin({
           toast: true,
           position: "top-right",
@@ -110,7 +109,7 @@ export default function AddExpectation({
                   <MDBInput
                     name="team_1_picture"
                     rows={6}
-                    type="file"
+                    type="text"
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"
                     //   value={expectation.team_1_picture}
@@ -135,8 +134,9 @@ export default function AddExpectation({
                 </div>
                 <div className="col-6 my-3">
                   <MDBInput
-                    name="Second Team-Logo"
-                    type="file"
+                    label="Second Team-Logo"
+                    name="team_2_picture"
+                    type="text"
                     rows={6}
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"

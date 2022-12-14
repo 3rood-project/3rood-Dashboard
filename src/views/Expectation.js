@@ -95,7 +95,7 @@ function AllExpectation() {
       <Container fluid>
         <Row>
           <Col md="12">
-            <Button variant="success" className={"mb-3"} onClick={handleShow}>
+            <Button variant="success" className={"mb-3"} onClick={toggleShow2}>
               Add New Article
             </Button>
             <Card className="strpied-tabled-with-hover">
@@ -172,7 +172,11 @@ function AllExpectation() {
           </Col>
         </Row>
       </Container>
-      <AddExpectation />
+      <AddExpectation
+        toggleShow={toggleShow2}
+        setBasicModal={setOptSmModal2}
+        basicModal={optSmModal2}
+      />
       {/*}  <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Expectation</Modal.Title>
