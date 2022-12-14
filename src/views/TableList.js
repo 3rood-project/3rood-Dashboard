@@ -76,9 +76,6 @@ function TableList() {
       <Container fluid>
         <Row>
           <Col md="12">
-            <Button variant="success" className={"mb-3"} onClick={handleShow}>
-              Add New User
-            </Button>
             <Card className="strpied-tabled-with-hover">
               <Card.Header>
                 <Card.Title as="h4">All Users </Card.Title>
@@ -113,7 +110,7 @@ function TableList() {
                               className="btn btn-danger ms-4"
                               onClick={() => handleDelete(user.user_id)}
                             >
-                              Delete
+                              Deactivate
                             </button>
                           </td>
                         </tr>

@@ -18,16 +18,21 @@ import Swal from "sweetalert2";
 
 const qs = require("qs");
 
-export default function EditExpectation({
+export default function AddExpectation({
   basicModal,
   setBasicModal,
   toggleShow,
-  expectation,
 }) {
-  // console.log(expectation.id);
-
-  const [update, setUpdate] = useState(false);
-  const [expectationData, setExpectationData] = useState(expectation);
+  const [add, setAdd] = useState(false);
+  const [expectationData, setExpectationData] = useState({
+    team_1: "",
+    team_1_picture: "",
+    team_2: "",
+    team_2_picture: "",
+    date: "",
+    result: "",
+    points: "",
+  });
 
   function handleEditExpectation(e) {
     console.log(e.target.name);
@@ -35,16 +40,16 @@ export default function EditExpectation({
   }
 
   const config = {
-    method: "put",
-    url: `http://127.0.0.1:8000/api/expectation/${expectation.id}`,
+    method: "post",
+    url: "http://localhost:8000/api/addExpectation",
     headers: {
       Accept: "application/vnd.api+json",
       "Content-Type": "application/x-www-form-urlencoded",
     },
-    data: qs.stringify(expectationData),
+    data: expectationData,
   };
 
-  const handleEdit = () => {
+  const handelSubmitted = () => {
     if (expectationData == "") return null;
     axios(config)
       .then(function (res) {
@@ -65,7 +70,7 @@ export default function EditExpectation({
           icon: "success",
           title: res.data.message,
         });
-        setUpdate(!update);
+        setAdd(!add);
         toggleShow();
       })
       .catch(function (error) {
@@ -95,7 +100,7 @@ export default function EditExpectation({
                     name="team_1"
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"
-                    value={expectationData.team_1}
+                    // value={expectationData.team_1}
                     onChange={(e) => {
                       handleEditExpectation(e);
                     }}
@@ -122,7 +127,7 @@ export default function EditExpectation({
                     rows={6}
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"
-                    value={expectationData.team_2}
+                    // value={expectationData.team_2}
                     onChange={(e) => {
                       handleEditExpectation(e);
                     }}
@@ -150,7 +155,7 @@ export default function EditExpectation({
                     rows={6}
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"
-                    value={expectationData.points}
+                    // value={expectationData.points}
                     onChange={(e) => {
                       handleEditExpectation(e);
                     }}
@@ -165,7 +170,7 @@ export default function EditExpectation({
                     rows={6}
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"
-                    value={expectationData.date}
+                    // value={expectationData.date}
                     onChange={(e) => {
                       handleEditExpectation(e);
                     }}
@@ -179,7 +184,7 @@ export default function EditExpectation({
                     rows={12}
                     style={{ backgroundColor: "#fff" }}
                     wrapperClass="w-100"
-                    value={expectationData.result}
+                    // value={expectationData.result}
                     onChange={(e) => {
                       handleEditExpectation(e);
                     }}
@@ -201,8 +206,8 @@ export default function EditExpectation({
               >
                 Close
               </MDBBtn>
-              <MDBBtn onClick={handleEdit}>
-                <i class="fas fa-share-square"></i>Save changes
+              <MDBBtn onClick={handelSubmitted}>
+                <i class="fas fa-share-square"></i>Add
               </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
