@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 // react-bootstrap components
 import {
@@ -14,7 +15,18 @@ import {
 } from "react-bootstrap";
 
 function Comments() {
-    const handleDelete = () => {
+
+  const [allComments, setAllComments] = useState([]);
+  const [deleteComment, setDeleteComment] = useState(false);
+
+  useEffect(()=> {
+    axios.get('http://localhost:8000/api/all-comments').then((response)=>{
+      console.log(response.data.data);
+      setAllComments(response.data.data);
+   })
+  },[deleteComment])
+
+    const handleDelete = (id) => {
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this item!",
@@ -27,6 +39,10 @@ function Comments() {
               swal("Poof! Your item has been deleted!", {
                 icon: "success",
               });
+              axios.delete(`http://localhost:8000/api/delete-comment/${id}`).then((response)=>{
+                console.log(response);
+                setDeleteComment(!deleteComment);
+              })
             } else {
               swal("Your item is safe!");
             }
@@ -58,15 +74,16 @@ function Comments() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>$36,738</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td><button className="btn btn-danger ms-4" onClick={handleDelete}>Delete</button></td>
-
-                    </tr>
+                    {allComments.map((comment)=>{
+                      return <tr key={comment.comment_id}>
+                         <td>{comment.comment_id}</td>
+                         <td>{comment.user_info.first_name}</td>
+                         <td>not find in commentResource</td>
+                         <td>not find in commentResource</td>
+                         <td>{comment.comment_content}</td>
+                         <td><button className="btn btn-danger ms-4" onClick={() => handleDelete(comment.comment_id)}>Delete</button></td>
+                       </tr>
+                    })}
                    
                   </tbody>
                 </Table>

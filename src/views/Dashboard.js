@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ChartistGraph from "react-chartist";
 // react-bootstrap components
 import {
@@ -15,8 +15,19 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import axios from "axios";
 
 function Dashboard() {
+  const [counts, setCounts] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/data-counts').then((response) => {
+      console.log(response.data.data);
+      setCounts(response.data.data);
+    })
+  },[])
+
+
   return (
     <>
       <Container fluid>
@@ -33,7 +44,7 @@ function Dashboard() {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Total Users</p>
-                      <Card.Title as="h4">150GB</Card.Title>
+                      <Card.Title as="h4">{counts.users}</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -58,8 +69,8 @@ function Dashboard() {
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">News</p>
-                      <Card.Title as="h4">$ 1,345</Card.Title>
+                      <p className="card-category">Total News</p>
+                      <Card.Title as="h4">{counts.news}</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -68,7 +79,7 @@ function Dashboard() {
                 <hr></hr>
                 <div className="stats">
                   <i className="far fa-calendar-alt mr-1"></i>
-                  Total Comments
+                  Total news
                 </div>
               </Card.Footer>
             </Card>
@@ -85,7 +96,7 @@ function Dashboard() {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Total Posts</p>
-                      <Card.Title as="h4">23</Card.Title>
+                      <Card.Title as="h4">{counts.posts}</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -111,7 +122,34 @@ function Dashboard() {
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Total Comments</p>
-                      <Card.Title as="h4">+45K</Card.Title>
+                      <Card.Title as="h4">{counts.cmments}</Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <hr></hr>
+                <div className="stats">
+                  <i className="fas fa-redo mr-1"></i>
+                  Update now
+                </div>
+              </Card.Footer>
+            </Card>
+          </Col>
+
+          <Col lg="3" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <i className="nc-icon nc-chat-round text-primary"></i>
+                    </div>
+                  </Col>
+                  <Col xs="7">
+                    <div className="numbers">
+                      <p className="card-category">Expectations</p>
+                      <Card.Title as="h4">{counts.expectation}</Card.Title>
                     </div>
                   </Col>
                 </Row>
