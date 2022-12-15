@@ -22,11 +22,12 @@ export default function EditExpectation({
   basicModal,
   setBasicModal,
   toggleShow,
+  update,
+  setUpdate,
   expectation,
 }) {
-  // console.log(expectation.id);
+  console.log(expectation.id);
 
-  const [update, setUpdate] = useState(false);
   const [expectationData, setExpectationData] = useState(expectation);
 
   function handleEditExpectation(e) {

@@ -21,7 +21,6 @@ function Posts() {
   const [approved, setApproved] = useState(false);
   const [deny, setDeny] = useState(false);
 
-
   useEffect(() => {
     axios.get("http://localhost:8000/api/pendingsPost").then((response) => {
       console.log(response.data.data);
@@ -29,17 +28,18 @@ function Posts() {
     });
   }, [approved, deny]);
 
-
-  function handleApprove(id){
-    axios.put(`http://localhost:8000/api/approve-post/${id}`).then((response) => {
-      setApproved(!approved);
-    })
+  function handleApprove(id) {
+    axios
+      .put(`http://localhost:8000/api/approve-post/${id}`)
+      .then((response) => {
+        setApproved(!approved);
+      });
   }
 
-  function handleDeny(id){
+  function handleDeny(id) {
     axios.put(`http://localhost:8000/api/deny-post/${id}`).then((response) => {
       setDeny(!deny);
-    })
+    });
   }
 
   return (
@@ -59,8 +59,7 @@ function Posts() {
                       <th className="border-0">ID</th>
                       <th className="border-0">User Name</th>
                       <th className="border-0">Post Content</th>
-                      <th className="border-0">Post Image</th>
-                      {/* <th className="border-0">photo</th> */}
+
                       <th className="border-0"></th>
                     </tr>
                   </thead>
@@ -68,19 +67,31 @@ function Posts() {
                     {console.log(pendings)}
                     {pendings?.map((pending) => {
                       console.log(pending);
-                     return <tr>
-                        <td>{pending.user_info.id}</td>
-                        <td>{pending.user_info.first_name}</td>
-                        <td>{pending.post_content.slice(0, 30)}...More</td>
-                        <td>{pending.post_image}</td>
-                        <td>
-                          <button onClick={() => handleApprove(pending.post_id)} className="btn btn-success">Approve</button>
-                        </td>
+                      return (
+                        <tr>
+                          <td>{pending.user_info.id}</td>
+                          <td>{pending.user_info.first_name}</td>
+                          <td>{pending.post_content.slice(0, 30)}...More</td>
 
-                        <td>
-                          <button onClick={() => handleDeny(pending.post_id)} className="btn btn-danger ms-4">Deny</button>
-                        </td>
-                      </tr>
+                          <td>
+                            <button
+                              onClick={() => handleApprove(pending.post_id)}
+                              className="btn btn-success"
+                            >
+                              Approve
+                            </button>
+                          </td>
+
+                          <td>
+                            <button
+                              onClick={() => handleDeny(pending.post_id)}
+                              className="btn btn-danger ms-4"
+                            >
+                              Deny
+                            </button>
+                          </td>
+                        </tr>
+                      );
                     })}
                   </tbody>
                 </Table>

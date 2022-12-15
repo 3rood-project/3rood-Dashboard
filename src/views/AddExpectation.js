@@ -16,14 +16,15 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const qs = require("qs");
+// const qs = require("qs");
 
 export default function AddExpectation({
   basicModal,
   setBasicModal,
   toggleShow,
+  add,
+  setAdd,
 }) {
-  const [add, setAdd] = useState(false);
   const [expectationData, setExpectationData] = useState({
     team_1: "",
     team_1_picture: "",
