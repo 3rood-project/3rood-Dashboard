@@ -23,9 +23,11 @@ function AllExpectation() {
   const [allExpectation, setAllExpectation] = useState([]);
   const [deleteExpectation, setDeleteExpectation] = useState(false);
   const [optSmModal2, setOptSmModal2] = useState(false);
+  const [optSmModal1, setOptSmModal1] = useState(false);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
+  const toggleShow1 = () => setOptSmModal1(!optSmModal1);
   const toggleShow2 = () => setOptSmModal2(!optSmModal2);
   // state for add article
   const [newExpectation, setNewExpectation] = useState({
@@ -108,9 +110,9 @@ function AllExpectation() {
                     <tr>
                       <th className="border-0">ID</th>
                       <th className="border-0">First Team </th>
-                      <th className="border-0">First Team logo </th>
+                      {/* <th className="border-0">First Team logo </th> */}
                       <th className="border-0">Second Team</th>
-                      <th className="border-0">Second Team logo</th>
+                      {/* <th className="border-0">Second Team logo</th> */}
                       <th className="border-0">Points</th>
                       <th className="border-0">Date</th>
                       <th className="border-0">Result </th>
@@ -122,19 +124,19 @@ function AllExpectation() {
                         <tr key={expectation.id}>
                           <td>{expectation.id}</td>
                           <td>{expectation.team_1}</td>
-                          <td>
+                          {/* <td>
                             <img
                               src={expectation.team_1_picture}
                               alt="alt image"
                             />
-                          </td>
+                          </td> */}
                           <td>{expectation.team_2}</td>
-                          <td>
+                          {/* <td>
                             <img
                               src={expectation.team_2_picture}
                               alt="alt image"
                             />
-                          </td>
+                          </td> */}
                           <td>{expectation.points}</td>
                           <td>{expectation.date}</td>
                           <td>{expectation.result}</td>
@@ -151,13 +153,13 @@ function AllExpectation() {
                               <MDBIcon
                                 fas
                                 icon="edit"
-                                onClick={toggleShow2}
+                                onClick={toggleShow1}
                                 style={{ fontSize: 20, cursor: "pointer" }}
                               />
                               <EditExpectation
-                                toggleShow={toggleShow2}
-                                setBasicModal={setOptSmModal2}
-                                basicModal={optSmModal2}
+                                toggleShow={toggleShow1}
+                                setBasicModal={setOptSmModal1}
+                                basicModal={optSmModal1}
                                 expectation={expectation}
                               />
                             </div>
