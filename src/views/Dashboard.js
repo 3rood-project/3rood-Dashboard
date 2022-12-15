@@ -18,15 +18,13 @@ import {
 import axios from "axios";
 
 function Dashboard() {
-  const [counts, setCounts] = useState('');
+  const [counts, setCounts] = useState("");
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/data-counts').then((response) => {
-      console.log(response.data.data);
+    axios.get("http://localhost:8000/api/data-counts").then((response) => {
       setCounts(response.data.data);
-    })
-  },[])
-
+    });
+  }, []);
 
   return (
     <>
@@ -143,7 +141,11 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-chat-round text-primary"></i>
+                      <i
+                        className="nc-icon nc-alien-33
+
+text-primary"
+                      ></i>
                     </div>
                   </Col>
                   <Col xs="7">

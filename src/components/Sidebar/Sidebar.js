@@ -34,6 +34,8 @@ function Sidebar({ color, image, routes }) {
         style={{
           backgroundImage:
             "url('https://r1.ilikewallpaper.net/iphone-wallpapers/download/80252/green-sports-court-illustration-iphone-wallpaper-ilikewallpaper_com.jpg')",
+          backgroundImage:
+            "url('https://r1.ilikewallpaper.net/iphone-wallpapers/download/80252/green-sports-court-illustration-iphone-wallpaper-ilikewallpaper_com.jpg')",
         }}
       />
       <div className="sidebar-wrapper">

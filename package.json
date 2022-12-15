@@ -19,7 +19,8 @@
     "react-scripts": "5.0.1",
     "reactstrap": "8.8.1",
     "sass": "1.53.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.6.15"
   },
   "optionalDependencies": {
     "jquery": "3.5.1",

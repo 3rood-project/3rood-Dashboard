@@ -26,9 +26,9 @@ import Allposts from "views/Allposts.js";
 import Comments from "views/Comments.js";
 import News from "views/News.js";
 
-
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
+import AllExpectation from "views/Expectation";
 
 const dashboardRoutes = [
   // {
@@ -44,7 +44,7 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
-    layout: "/admin"
+    layout: "/admin",
   },
   // {
   //   path: "/user",
@@ -58,7 +58,7 @@ const dashboardRoutes = [
     name: "Users",
     icon: "nc-icon nc-circle-09",
     component: TableList,
-    layout: "/admin"
+    layout: "/admin",
   },
   // {
   //   path: "/typography",
@@ -72,44 +72,43 @@ const dashboardRoutes = [
   //   name: "Icons",
   //   icon: "nc-icon nc-atom",
   //   component: Icons,
-  //   layout: "/admin"
+  //   layout: "/admin",
   // },
   {
     path: "/posts",
     name: "Posts Request",
     icon: "nc-icon nc-send",
     component: Posts,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/allposts",
     name: "All Posts",
     icon: "nc-icon nc-paper-2",
     component: Allposts,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/comments",
     name: "Comments",
     icon: "nc-icon nc-chat-round",
     component: Comments,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/news",
     name: "News",
     icon: "nc-icon nc-single-copy-04",
     component: News,
-    layout: "/admin"
-  }
-  // ,
-  // {
-  //   path: "/notifications",
-  //   name: "Notifications",
-  //   icon: "nc-icon nc-bell-55",
-  //   component: Notifications,
-  //   layout: "/admin"
-  // }
+    layout: "/admin",
+  },
+  {
+    path: "/expectation",
+    name: "Expectation",
+    icon: "nc-icon nc-alien-33",
+    component: AllExpectation,
+    layout: "/admin",
+  },
 ];
 
 export default dashboardRoutes;
