@@ -21,12 +21,16 @@ import EditExpectation from "./EditExpectation";
 
 function AllExpectation() {
   const [allExpectation, setAllExpectation] = useState([]);
+  const [add, setAdd] = useState(false);
+  const [update, setUpdate] = useState(false);
   const [deleteExpectation, setDeleteExpectation] = useState(false);
   const [optSmModal2, setOptSmModal2] = useState(false);
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const [optSmModal1, setOptSmModal1] = useState(false);
+  // const [show, setShow] = useState(false);
+  // const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
   const toggleShow2 = () => setOptSmModal2(!optSmModal2);
+  const toggleShow1 = () => setOptSmModal1(!optSmModal1);
   // state for add article
   const [newExpectation, setNewExpectation] = useState({
     team_1: "",
@@ -43,7 +47,7 @@ function AllExpectation() {
       // console.log(response.data.data);
       setAllExpectation(response.data.data);
     });
-  }, [deleteExpectation]);
+  }, [deleteExpectation, add, update]);
 
   const handleDelete = (id) => {
     swal({
@@ -70,32 +74,32 @@ function AllExpectation() {
     });
   };
   // to add new article
-  function handleSubmitAddExpectation(e) {
-    e.preventDefault();
+  // function handleSubmitAddExpectation(e) {
+  //   e.preventDefault();
 
-    const config = {
-      method: "post",
-      url: "http://localhost:8000/api/addExpectation",
-      headers: {
-        Accept: "application/vnd.api+json",
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      data: qs.stringify(newArticle),
-    };
+  //   const config = {
+  //     method: "post",
+  //     url: "http://localhost:8000/api/addExpectation",
+  //     headers: {
+  //       Accept: "application/vnd.api+json",
+  //       "Content-Type": "application/x-www-form-urlencoded",
+  //     },
+  //     data: qs.stringify(newArticle),
+  //   };
 
-    axios(config).then((res) => {
-      console.log(res);
-      setUpdated(!updated);
-      setShow(false);
-    });
-  }
+  //   axios(config).then((res) => {
+  //     console.log(res);
+  //     setUpdated(!updated);
+  //     setShow(false);
+  //   });
+  // }
 
   return (
     <>
       <Container fluid>
         <Row>
           <Col md="12">
-            <Button variant="success" className={"mb-3"} onClick={toggleShow2}>
+            <Button variant="success" className={"mb-3"} onClick={toggleShow1}>
               Add New Article
             </Button>
             <Card className="strpied-tabled-with-hover">
@@ -149,7 +153,6 @@ function AllExpectation() {
                           <td>
                             <div>
                               <MDBIcon
-                                fas
                                 icon="edit"
                                 onClick={toggleShow2}
                                 style={{ fontSize: 20, cursor: "pointer" }}
@@ -159,6 +162,8 @@ function AllExpectation() {
                                 setBasicModal={setOptSmModal2}
                                 basicModal={optSmModal2}
                                 expectation={expectation}
+                                update={update}
+                                setUpdate={setUpdate}
                               />
                             </div>
                           </td>
@@ -173,9 +178,11 @@ function AllExpectation() {
         </Row>
       </Container>
       <AddExpectation
-        toggleShow={toggleShow2}
-        setBasicModal={setOptSmModal2}
-        basicModal={optSmModal2}
+        toggleShow={toggleShow1}
+        setBasicModal={setOptSmModal1}
+        basicModal={optSmModal1}
+        add={add}
+        setAdd={setAdd}
       />
       {/*}  <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

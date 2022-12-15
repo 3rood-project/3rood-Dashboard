@@ -65,9 +65,6 @@ function Allposts() {
                       <th className="border-0">User ID</th>
                       <th className="border-0">User Name</th>
                       <th className="border-0">Post Content</th>
-                      <th className="border-0">photo</th>
-
-                      <th className="border-0"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -77,10 +74,8 @@ function Allposts() {
                           <td>{post.post_id}</td>
                           <td>{post.user_info.id}</td>
                           <td>{post.user_info.first_name}</td>
-                          <td>{post.post_content.slice(0, 20)}... See More</td>
-                          <td>
-                            <img src={post.post_image} alt="alt image" />
-                          </td>
+                          <td>{post.post_content.slice(0, 20)}...</td>
+
                           <td>
                             <button
                               className="btn btn-danger ms-4"
