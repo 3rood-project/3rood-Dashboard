@@ -71,7 +71,9 @@ function Posts() {
                         <tr>
                           <td>{pending.user_info.id}</td>
                           <td>{pending.user_info.first_name}</td>
-                          <td>{pending.post_content.slice(0, 30)}...More</td>
+                          <td style={{ width: "70%" }}>
+                            {pending.post_content}
+                          </td>
 
                           <td>
                             <button

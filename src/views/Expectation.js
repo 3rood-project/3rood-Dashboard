@@ -185,74 +185,7 @@ function AllExpectation() {
         add={add}
         setAdd={setAdd}
       />
-      {/*}  <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add New Expectation</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={(e) => handleSubmitAddExpectation(e)}>
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label>Author</Form.Label>
-              <Form.Control
-                name="author"
-                // value={newArticle.author}
-                onChange={(e) => handleSubmitAddExpectation(e)}
-                type="text-area"
-                placeholder="Enter Author name"
-              />
-            </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicTitle">
-              <Form.Label>ARTICLE TITLE</Form.Label>
-              <Form.Control
-                name="title"
-                // value={newArticle.title}
-                onChange={(e) => handleSubmitAddExpectation(e)}
-                type="text"
-                placeholder="ARTICLE TITLE"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>ARTICLE IMAGE</Form.Label>
-              <Form.Control name="image" type="file" />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicExcerpt">
-              <Form.Label>ARTICLE EXCERPT</Form.Label>
-              <Form.Control
-                name="excerpt"
-                // value={newArticle.excerpt}
-                onChange={(e) => handleSubmitAddExpectation(e)}
-                as="textarea"
-                type="text"
-                placeholder="ARTICLE EXCERPT"
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formBasicContent">
-              <Form.Label>ARTICLE CONTENT</Form.Label>
-              <Form.Control
-                name="summary"
-                // value={newArticle.summary}
-                onChange={(e) => handleSubmitAddExpectation(e)}
-                as="textarea"
-                type="text"
-                placeholder="ARTICLE CONTENT"
-              />
-            </Form.Group>
-            <div className="d-flex justify-content-between">
-              <Button variant="danger" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="success" type="submit">
-                Add
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer></Modal.Footer>
-                  </Modal>*/}
     </>
   );
 }

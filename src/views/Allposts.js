@@ -62,7 +62,7 @@ function Allposts() {
                   <thead>
                     <tr>
                       <th className="border-0">ID</th>
-                      <th className="border-0">User ID</th>
+
                       <th className="border-0">User Name</th>
                       <th className="border-0">Post Content</th>
                     </tr>
@@ -72,9 +72,9 @@ function Allposts() {
                       return (
                         <tr key={post.post_id}>
                           <td>{post.post_id}</td>
-                          <td>{post.user_info.id}</td>
+
                           <td>{post.user_info.first_name}</td>
-                          <td>{post.post_content.slice(0, 20)}...</td>
+                          <td style={{ width: "70%" }}>{post.post_content}</td>
 
                           <td>
                             <button

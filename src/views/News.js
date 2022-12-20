@@ -330,6 +330,11 @@ function News() {
                 />
               </Form.Group>
 
+              <Form.Group controlId="formFile" className="mb-3">
+                <Form.Label>ARTICLE PHOTO</Form.Label>
+                <Form.Control name="list_media" type="file" />
+              </Form.Group>
+
               <Form.Group className="mb-3" controlId="formBasicTitle">
                 <Form.Label>ARTICLE TITLE</Form.Label>
                 <Form.Control
@@ -348,6 +353,8 @@ function News() {
                   value={currentModalAtricle.summary}
                   onChange={(e) => handleChange(e)}
                   type="text"
+                  as="textarea"
+                  style={{ height: "100px" }}
                   placeholder="ARTICLE CONTENT"
                 />
               </Form.Group>
@@ -359,13 +366,10 @@ function News() {
                   value={currentModalAtricle.excerpt}
                   onChange={(e) => handleChange(e)}
                   type="text"
-                  placeholder="ARTICLE CONTENT"
+                  as="textarea"
+                  style={{ height: "100px" }}
+                  placeholder="ARTICLE EXCERPT"
                 />
-              </Form.Group>
-
-              <Form.Group controlId="formFile" className="mb-3">
-                <Form.Label>ARTICLE PHOTO</Form.Label>
-                <Form.Control name="list_media" type="file" />
               </Form.Group>
 
               <div className="d-flex justify-content-between">
