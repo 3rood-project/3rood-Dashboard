@@ -16,8 +16,6 @@ import {
 import axios from "axios";
 import Swal from "sweetalert2";
 
-// const qs = require("qs");
-
 export default function AddExpectation({
   basicModal,
   setBasicModal,
