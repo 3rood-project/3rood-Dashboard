@@ -1,31 +1,17 @@
 import React, { useEffect, useState } from "react";
 import ChartistGraph from "react-chartist";
 // react-bootstrap components
-import {
-  Badge,
-  Button,
-  Card,
-  Navbar,
-  Nav,
-  Table,
-  Container,
-  Row,
-  Col,
-  Form,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import { BsShop, BsCartCheckFill } from "react-icons/bs";
 import { IoMdContacts } from "react-icons/io";
 import { GiShoppingBag } from "react-icons/gi";
 import { HiUsers } from "react-icons/hi";
 import { MdOutlinePendingActions } from "react-icons/md";
-import axios from "axios";
+
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStatistics } from "reducers/StatisticReducers";
 
 function Dashboard() {
-  // const [counts, setCounts] = useState("");
   const dispatch = useDispatch();
   const counts = useSelector((state) => state.statistics.statistics);
   useEffect(() => {

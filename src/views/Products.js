@@ -2,26 +2,34 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 // react-bootstrap components
-import { Card, Table, Container, Row, Col } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Card,
+  Navbar,
+  Nav,
+  Table,
+  Container,
+  Row,
+  Col,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllShopsReducers } from "reducers/AllShopsReducers";
+import { fetchProductsReducers } from "reducers/ProductsReducers";
 import Swal from "sweetalert2";
 
-function Allposts() {
-  const [deletePost, setDeletePost] = useState(false);
-
+function Products() {
   const dispatch = useDispatch();
-  const allPosts = useSelector((state) => state.allShops.allShops);
+  const allProducts = useSelector((state) => state.products.allProducts);
   useEffect(() => {
-    if (!allPosts.users) {
-      dispatch(fetchAllShopsReducers());
+    if (allProducts) {
+      dispatch(fetchProductsReducers());
     }
   }, []);
-
+  console.log(allProducts);
   const handleDelete = (id) => {
     const config = {
       method: "delete",
-      url: `http://127.0.0.1:8000/api/shopDelete/${id}`,
+      url: `http://127.0.0.1:8000/api/deleteProducts/${id}`,
       headers: {
         Accept: "application/vnd.api+json",
         "Content-Type": "application/vnd.api+json",
@@ -52,14 +60,13 @@ function Allposts() {
           });
           Toast.fire({
             icon: "success",
-            title: "shop deactivate successfully",
+            title: "user  deleted successfully",
           });
-          dispatch(fetchAllShopsReducers());
+          dispatch(fetchProductsReducers());
         });
       }
     });
   };
-
   return (
     <>
       <Container fluid>
@@ -67,42 +74,38 @@ function Allposts() {
           <Col md="12">
             <Card className="strpied-tabled-with-hover">
               <Card.Header>
-                <Card.Title as="h4">All Shops</Card.Title>
-                <p className="card-category">All Approved Shops</p>
+                <Card.Title as="h4">Shop's Products</Card.Title>
+                <p className="card-category">Here is All Products.</p>
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <th className="border-0">Shop Profile</th>
+                      <th className="border-0">product photo</th>
+                      <th className="border-0">product Name</th>
 
-                      <th className="border-0">Shop Name</th>
-                      <th className="border-0">Shop Category</th>
+                      <th className="border-0">Product Price</th>
+                      <th className="border-0">Product Content</th>
+                      <th className="border-0"></th>
                     </tr>
                   </thead>
                   <tbody>
-                    {allPosts.map((post) => {
+                    {allProducts.map((product) => {
                       return (
-                        <tr key={post.post_id}>
+                        <tr key={product.product_id}>
                           <td>
-                            <img
-                              src={post.shop_info.ProfilePhoto}
-                              alt=""
-                              width={45}
-                            />
+                            <img src={product.productPhoto} alt="" width={45} />
                           </td>
+                          <td>{product.productName}</td>
+                          <td>{product.productPrice}JD</td>
 
-                          <td>{post.shop_info.shopName}</td>
-                          <td>{post.shop_info.category}</td>
-
+                          <td>{product.expirationDate}</td>
                           <td>
                             <button
                               className="btn btn-danger ms-4"
-                              onClick={() =>
-                                handleDelete(post.shop_info.shop_id)
-                              }
+                              onClick={() => handleDelete(product.product_id)}
                             >
-                              Remove
+                              Delete
                             </button>
                           </td>
                         </tr>
@@ -119,4 +122,4 @@ function Allposts() {
   );
 }
 
-export default Allposts;
+export default Products;
