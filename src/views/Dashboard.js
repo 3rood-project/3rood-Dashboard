@@ -15,15 +15,23 @@ import {
   OverlayTrigger,
   Tooltip,
 } from "react-bootstrap";
+import { BsShop, BsCartCheckFill } from "react-icons/bs";
+import { IoMdContacts } from "react-icons/io";
+import { GiShoppingBag } from "react-icons/gi";
+import { HiUsers } from "react-icons/hi";
+import { MdOutlinePendingActions } from "react-icons/md";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStatistics } from "reducers/StatisticReducers";
 
 function Dashboard() {
-  const [counts, setCounts] = useState("");
-
+  // const [counts, setCounts] = useState("");
+  const dispatch = useDispatch();
+  const counts = useSelector((state) => state.statistics.statistics);
   useEffect(() => {
-    axios.get("http://localhost:8000/api/data-counts").then((response) => {
-      setCounts(response.data.data);
-    });
+    if (!counts.users) {
+      dispatch(fetchStatistics());
+    }
   }, []);
 
   return (
@@ -36,23 +44,19 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-single-02 text-warning"></i>
+                      <HiUsers />
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
                       <p className="card-category">Total Users</p>
-                      <Card.Title as="h4">{counts.users}</Card.Title>
+                      <Card.Title as="h3">{counts.users}</Card.Title>
                     </div>
                   </Col>
                 </Row>
               </Card.Body>
               <Card.Footer>
                 <hr></hr>
-                <div className="stats">
-                  <i className="nc-icon nc-paper-02 mr-1"></i>
-                  Total Posts
-                </div>
               </Card.Footer>
             </Card>
           </Col>
@@ -62,23 +66,19 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-light-3 text-success"></i>
+                      <BsShop />
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Total News</p>
-                      <Card.Title as="h4">{counts.news}</Card.Title>
+                      <p className="card-category">Total Shops</p>
+                      <Card.Title as="h3">{counts.approvedShops}</Card.Title>
                     </div>
                   </Col>
                 </Row>
               </Card.Body>
               <Card.Footer>
                 <hr></hr>
-                <div className="stats">
-                  <i className="far fa-calendar-alt mr-1"></i>
-                  Total news
-                </div>
               </Card.Footer>
             </Card>
           </Col>
@@ -88,23 +88,19 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-paper-2 text-danger"></i>
+                      <MdOutlinePendingActions />
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Total Posts</p>
-                      <Card.Title as="h4">{counts.posts}</Card.Title>
+                      <p className="card-category">Total Shop Requests</p>
+                      <Card.Title as="h3">{counts.pendingShops}</Card.Title>
                     </div>
                   </Col>
                 </Row>
               </Card.Body>
               <Card.Footer>
                 <hr></hr>
-                <div className="stats">
-                  <i className="far fa-clock-o mr-1"></i>
-                  In the last hour
-                </div>
               </Card.Footer>
             </Card>
           </Col>
@@ -114,23 +110,19 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i className="nc-icon nc-chat-round text-primary"></i>
+                      <IoMdContacts />
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Total Comments</p>
-                      <Card.Title as="h4">{counts.cmments}</Card.Title>
+                      <p className="card-category">Contact Messages</p>
+                      <Card.Title as="h3">{counts.contact}</Card.Title>
                     </div>
                   </Col>
                 </Row>
               </Card.Body>
               <Card.Footer>
                 <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update now
-                </div>
               </Card.Footer>
             </Card>
           </Col>
@@ -141,27 +133,42 @@ function Dashboard() {
                 <Row>
                   <Col xs="5">
                     <div className="icon-big text-center icon-warning">
-                      <i
-                        className="nc-icon nc-alien-33
-
-text-primary"
-                      ></i>
+                      <GiShoppingBag />
                     </div>
                   </Col>
                   <Col xs="7">
                     <div className="numbers">
-                      <p className="card-category">Expectations</p>
-                      <Card.Title as="h4">{counts.expectation}</Card.Title>
+                      <p className="card-category">Products</p>
+                      <Card.Title as="h3">{counts.products}</Card.Title>
                     </div>
                   </Col>
                 </Row>
               </Card.Body>
               <Card.Footer>
                 <hr></hr>
-                <div className="stats">
-                  <i className="fas fa-redo mr-1"></i>
-                  Update now
-                </div>
+              </Card.Footer>
+            </Card>
+          </Col>
+
+          <Col lg="4" sm="6">
+            <Card className="card-stats">
+              <Card.Body>
+                <Row>
+                  <Col xs="5">
+                    <div className="icon-big text-center icon-warning">
+                      <BsCartCheckFill />
+                    </div>
+                  </Col>
+                  <Col xs="7">
+                    <div className="numbers">
+                      <p className="card-category">Orders</p>
+                      <Card.Title as="h3">{counts.orders}</Card.Title>
+                    </div>
+                  </Col>
+                </Row>
+              </Card.Body>
+              <Card.Footer>
+                <hr></hr>
               </Card.Footer>
             </Card>
           </Col>

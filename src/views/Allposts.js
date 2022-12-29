@@ -2,24 +2,14 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 // react-bootstrap components
-import {
-  Badge,
-  Button,
-  Card,
-  Navbar,
-  Nav,
-  Table,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Card, Table, Container, Row, Col } from "react-bootstrap";
 
 function Allposts() {
   const [allPosts, setAllPosts] = useState([]);
   const [deletePost, setDeletePost] = useState(false);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/api/all-posts").then((response) => {
+    axios.get("http://localhost:8000/api/allShops").then((response) => {
       setAllPosts(response.data.data);
     });
   }, [deletePost]);
@@ -71,10 +61,12 @@ function Allposts() {
                     {allPosts.map((post) => {
                       return (
                         <tr key={post.post_id}>
-                          <td>{post.post_id}</td>
+                          <td>
+                            <img src={post.ProfilePhoto} alt="" width={45} />
+                          </td>
 
-                          <td>{post.user_info.first_name}</td>
-                          <td style={{ width: "70%" }}>{post.post_content}</td>
+                          <td>{post.shopName}</td>
+                          <td>{post.category}</td>
 
                           <td>
                             <button
