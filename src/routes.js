@@ -6,14 +6,21 @@ import Icons from "views/Icons.js";
 import ShopsRequest from "./views/ShopsRequest.js";
 import Allposts from "views/Allposts.js";
 
-import Comments from "views/Comments.js";
-import News from "views/News.js";
+import Products from "views/Products.js";
+import Contact from "views/Contact.js";
 
 import Notifications from "views/Notifications.js";
 import Upgrade from "views/Upgrade.js";
-import AllExpectation from "views/Expectation";
+import Orders from "views/Orders";
 
 const dashboardRoutes = [
+  {
+    path: "/Icons",
+    name: "Icons",
+    icon: "nc-icon nc-chart-pie-35",
+    component: UserProfile,
+    layout: "/admin",
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -47,22 +54,22 @@ const dashboardRoutes = [
   {
     path: "/products",
     name: "Products",
-    icon: "nc-icon nc-chat-round",
-    component: Comments,
+    icon: "nc-icon nc-tag-content",
+    component: Products,
     layout: "/admin",
   },
   {
     path: "/contact",
     name: "Contact Messages",
-    icon: "nc-icon nc-single-copy-04",
-    component: News,
+    icon: "nc-icon nc-chat-round",
+    component: Contact,
     layout: "/admin",
   },
   {
     path: "/order",
     name: "Orders",
-    icon: "nc-icon nc-alien-33",
-    component: AllExpectation,
+    icon: "nc-icon nc nc-cart-simple",
+    component: Orders,
     layout: "/admin",
   },
 ];
