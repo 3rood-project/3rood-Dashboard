@@ -11,7 +11,7 @@ const config = {
   headers: {
     Accept: "application/vnd.api+json",
     "Content-Type": "application/vnd.api+json",
-    Authorization: "Bearer 124|eyDiT6RiLYGl7CwilBT5vxYGumBaBN1lQgLkG6VX",
+    Authorization: "Bearer 2|i2GfvbsLjqnHHJXtZNftgQZFl5fxz5beWP8iBpBG",
   },
 };
 export const fetchOrdersReducers = createAsyncThunk(

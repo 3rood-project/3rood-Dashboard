@@ -14,13 +14,13 @@ import Upgrade from "views/Upgrade.js";
 import Orders from "views/Orders";
 
 const dashboardRoutes = [
-  {
-    path: "/Icons",
-    name: "Icons",
-    icon: "nc-icon nc-chart-pie-35",
-    component: UserProfile,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/Icons",
+  //   name: "Icons",
+  //   icon: "nc-icon nc-chart-pie-35",
+  //   component: UserProfile,
+  //   layout: "/admin",
+  // },
   {
     path: "/dashboard",
     name: "Dashboard",

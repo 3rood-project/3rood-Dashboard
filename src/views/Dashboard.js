@@ -15,9 +15,7 @@ function Dashboard() {
   const dispatch = useDispatch();
   const counts = useSelector((state) => state.statistics.statistics);
   useEffect(() => {
-    if (!counts.users) {
-      dispatch(fetchStatistics());
-    }
+    dispatch(fetchStatistics());
   }, []);
 
   return (
